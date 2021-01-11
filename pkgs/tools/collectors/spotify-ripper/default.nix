@@ -1,24 +1,19 @@
-{ stdenv
-, fetchFromGitHub
+{ stdenv, fetchFromGitHub
 
-, python2Packages
+, python3Packages
 
-, aacSupport ? false, faac
-, alacSupport ? false, libav
-, flacSupport ? false, flac
-, m4aSupport ? false, mp4Support ? false, fdk-aac-encoder
-, oggSupport ? false, vorbisTools
-, opusSupport ? false, opusTools
-}:
+, aacSupport ? false, faac, alacSupport ? false, libav, flacSupport ? false
+, flac, m4aSupport ? false, mp4Support ? false, fdk-aac-encoder
+, oggSupport ? false, vorbisTools, opusSupport ? false, opusTools }:
 
-assert aacSupport               -> faac.meta.available;
-assert alacSupport              -> libav.meta.available;
-assert flacSupport              -> flac.meta.available;
+assert aacSupport -> faac.meta.available;
+assert alacSupport -> libav.meta.available;
+assert flacSupport -> flac.meta.available;
 assert m4aSupport || mp4Support -> fdk-aac-encoder.meta.available;
-assert oggSupport               -> vorbisTools.meta.available;
-assert opusSupport              -> opusTools.meta.available;
+assert oggSupport -> vorbisTools.meta.available;
+assert opusSupport -> opusTools.meta.available;
 
-python2Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "spotify-ripper";
   version = "2016.12.31";
 
@@ -29,7 +24,7 @@ python2Packages.buildPythonApplication rec {
     sha256 = "003d6br20f1cf4qvmpl62bk0k4h4v66ib76wn36c23bnh9x5q806";
   };
 
-  propagatedBuildInputs = (with python2Packages; [
+  propagatedBuildInputs = (with python3Packages; [
     colorama
     mutagen
     pyspotify
@@ -49,7 +44,8 @@ python2Packages.buildPythonApplication rec {
   patches = [ ./fix-setup.patch ];
 
   meta = {
-    description = "Rip Spotify URIs to audio files, including ID3 tags and cover art";
+    description =
+      "Rip Spotify URIs to audio files, including ID3 tags and cover art";
     longDescription = ''
       Spotify-ripper is a small ripper script for Spotify that rips Spotify URIs
       to audio files and includes ID3 tags and cover art. By default
