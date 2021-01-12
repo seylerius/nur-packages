@@ -41,9 +41,6 @@ python3Packages.buildPythonApplication rec {
     (if opusSupport then opusTools else null)
   ];
 
-  # Remove impure executables.
-  patches = [ ./fix-setup.patch ];
-
   meta = {
     description =
       "Rip Spotify URIs to audio files, including ID3 tags and cover art";
