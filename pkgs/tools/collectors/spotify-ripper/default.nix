@@ -18,10 +18,11 @@ python3Packages.buildPythonApplication rec {
   version = "2016.12.31";
 
   src = fetchFromGitHub {
-    owner = "hbashton";
+    owner = "scaronni";
     repo = pname;
-    rev = "d0464193dead7bd3ac7580e98bde86a0f323acae";
-    sha256 = "003d6br20f1cf4qvmpl62bk0k4h4v66ib76wn36c23bnh9x5q806";
+    rev = "ad496e5ac5256be98bfa0985ac69e7c9d89edb15";
+    sha256 = "01w6zn6aha47b99d4mhvsbklqv3l6qk1sssax2a42yk45rzxh4jz";
+    # date = 2020-11-08T18:03:25+01:00;
   };
 
   propagatedBuildInputs = (with python3Packages; [
