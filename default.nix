@@ -11,6 +11,6 @@
 import ./pkgs { inherit pkgs; } // {
   # The `lib`, `modules`, and `overlay` names are special
   lib = import ./lib { inherit pkgs; }; # functions
-  modules = import ./modules; # NixOS modules
+  modules = import ./modules; # NixOS and Home-Manager modules
   overlays = import ./overlays; # nixpkgs overlays
 }

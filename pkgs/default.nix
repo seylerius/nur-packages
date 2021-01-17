@@ -1,10 +1,16 @@
 { pkgs }:
 
 rec {
-  spotify-ripper = pkgs.callPackage ./tools/collectors/spotify-ripper {
-    # NOTE: Not available in 20.03. Specifying it this way lets me cheat the
-    # build auto-failing on 20.03 because of the attribute not existing.
-    inherit (pkgs) fdk-aac-encoder;
-    python3Packages = pkgs.python3Packages;
+  python3Packages = pkgs.python3Packages // {
+    desktop-notify = pkgs.callPackage ./python/desktop-notify/default.nix {
+      inherit python3Packages;
+    };
+
+    xerox =
+      pkgs.callPackage ./python/xerox/default.nix { inherit python3Packages; };
+  };
+
+  keeprofi = pkgs.callPackage ./gui/launcher/rofi/keeprofi.nix {
+    inherit python3Packages;
   };
 }
