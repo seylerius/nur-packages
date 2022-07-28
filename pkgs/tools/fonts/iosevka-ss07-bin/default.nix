@@ -1,11 +1,13 @@
-{ stdenv, fetchzip, pkgs ? import <nixpkgs> { } }:
+{ stdenv, lib, fetchzip, pkgs ? import <nixpkgs> { } }:
 
-let version = "4.0.0";
+let version = "15.6.0";
 in fetchzip {
   name = "iosevka-ss07-bin-${version}";
 
   url =
     "https://github.com/be5invis/Iosevka/releases/download/v${version}/ttf-iosevka-ss07-${version}.zip";
+
+  stripRoot = false;
 
   postFetch = ''
     mkdir -p $out/share/fonts/truetype
@@ -26,7 +28,7 @@ in fetchzip {
 
   sha256 = "04799fcgcp37dbbpkwwclx7ik2rjqziasrqmi2inypbjqgwr2h9d";
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = "https://be5invis.github.io/Iosevka/";
     downloadPage = "https://github.com/be5invis/Iosevka/releases";
     description = ''

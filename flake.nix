@@ -1,11 +1,22 @@
 {
-  description = "A very basic flake";
+  description = "Sable's personal NUR repository";
 
-  outputs = { self, nixpkgs }: {
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
+  outputs = { self, nixpkgs }:
+    let
+      systems = [
+        "x86_64-linux"
+        "i686-linux"
+        "x86_64-darwin"
+        "aarch64-linux"
+        "armv6l-linux"
+        "armv7l-linux"
+      ];
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+    in {
 
-    defaultPackage.x86_64-linux = self.packages.x86_64-linux.hello;
-
-  };
+      packages = forAllSystems (system:
+        import ./default.nix { pkgs = import nixpkgs { inherit system; }; });
+    };
 }

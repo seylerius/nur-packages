@@ -2,18 +2,26 @@
 
 stdenv.mkDerivation {
   pname = "qtwebflix";
-  version = "0.1-20210623";
+  version = "0.1-20220626";
 
   src = fetchFromGitHub {
     owner = "gort818";
     repo = "qtwebflix";
-    rev = "5fc1e15a5afeed528b5d2ab03d5eb9d7bcbdf027";
-    sha = "0r9fwa685fwsq1wcidqjdyxar3lgcl4q6qx2flq42ykmwycs7zs8";
+    rev = "54c2c1bfe36fbd9406d342e34dca24285440164e";
+    sha256 = "1ygzdidbri5zkdygj1ni7bbac7hifl0cjksny2wil6q4p55p89in";
   };
 
-  nativeBuildInputs = [ pkgs.qmake ];
+  dontWrapQtApps = true;
 
-  buildInputs = [ pkgs.libsForQt5.qt5.qtwebengine xdg-utils ];
+  nativeBuildInputs = [
+    pkgs.libsForQt5.qmake # pkgs.libsForQt5.qt5.wrapQtAppsHook
+  ];
+
+  buildInputs = [
+    pkgs.libsForQt5.qt5.qtwebengine
+    pkgs.libsForQt5.qt5.qtbase
+    pkgs.xdg-utils
+  ];
 
   configureScript = "qmake -config release";
 }
