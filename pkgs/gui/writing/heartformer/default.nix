@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib
-, appimageTools ? pkgs.appimageTools, ... }:
+{ pkgs, lib, appimageTools, ... }:
 
 let
   pname = "HeartFormer";

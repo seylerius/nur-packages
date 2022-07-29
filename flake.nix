@@ -16,7 +16,7 @@
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
     in {
 
-      legacyPackages = forAllSystems (system:
+      packages = forAllSystems (system:
         import ./default.nix { pkgs = import nixpkgs { inherit system; }; });
     };
 }
