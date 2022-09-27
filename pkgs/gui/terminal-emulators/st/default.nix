@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchurl, pkgconfig, writeText, libX11, ncurses, libXft }:
+{ stdenv, lib, fetchurl, pkg-config, writeText, libX11, ncurses, libXft }:
 
 with lib;
 
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
     cp ${writeText "config.def.h" conf} config.h
   '';
 
-  nativeBuildInputs = [ pkgconfig ncurses ];
+  nativeBuildInputs = [ pkg-config ncurses ];
   buildInputs = [ libX11 libXft ];
 
   installPhase = ''
